@@ -37,8 +37,20 @@ services:
     volumes:
       - mongo:/data
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=InnocentUdo
-      - MONGO_INITDB_ROOT_PASSWORD=Bn19c0248@
+      - MONGO_INITDB_ROOT_USERNAME=innocentcharlesudo
+      - MONGO_INITDB_ROOT_PASSWORD=Bn19c0248
+
+#  oracle:
+#    container_name: oracle_db
+#    image: oracleinanutshell/oracle-xe-11g
+#    ports:
+#      - 1521:1521
+#      - 8080:8080
+#    environment:
+#      - ORACLE_ALLOW_REMOTE=true
+#      - ORACLE_ENABLE_XDB=true
+#      - ORACLE_DISABLE_ASYNCH_IO=true
+#      - ORACLE_PASSWORD=Bn19c0248@
 
   mongo-express:
     container_name: ms_mongo_express
@@ -47,9 +59,16 @@ services:
     ports:
       - 8081:8081
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=InnocentUdo
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=innocentcharlesudo
       - ME_CONFIG_MONGODB_ADMINPASSWORD=Bn19c0248
       - ME_CONFIG_MONGODB_SERVER=mongodb
+
+  mail-dev:
+    container_name: ms_mail_dev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
 
 networks:
   microservices-net:
