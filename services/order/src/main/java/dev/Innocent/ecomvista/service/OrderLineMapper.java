@@ -1,6 +1,7 @@
 package dev.Innocent.ecomvista.service;
 
 import dev.Innocent.ecomvista.DTO.request.OrderLineRequest;
+import dev.Innocent.ecomvista.DTO.response.OrderLineResponse;
 import dev.Innocent.ecomvista.model.Order;
 import dev.Innocent.ecomvista.model.OrderLine;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,12 @@ public class OrderLineMapper {
                         .id(orderLineRequest.orderId())
                         .build())
                 .build();
+    }
+
+    public OrderLineResponse toOrderLineResponse(OrderLine orderLine) {
+        return new OrderLineResponse(
+                orderLine.getId(),
+                orderLine.getQuantity()
+        );
     }
 }
