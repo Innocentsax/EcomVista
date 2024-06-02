@@ -2,11 +2,13 @@ package dev.Innocent.ecomvista.service;
 
 import dev.Innocent.ecomvista.DTO.request.OrderLineRequest;
 import dev.Innocent.ecomvista.DTO.request.OrderRequest;
+import dev.Innocent.ecomvista.DTO.request.PaymentRequest;
 import dev.Innocent.ecomvista.DTO.request.PurchaseRequest;
 import dev.Innocent.ecomvista.DTO.response.OrderConfirmation;
 import dev.Innocent.ecomvista.DTO.response.OrderResponse;
 import dev.Innocent.ecomvista.config.KafkaOrderProducer;
 import dev.Innocent.ecomvista.connect.CustomerClient;
+import dev.Innocent.ecomvista.connect.PaymentClient;
 import dev.Innocent.ecomvista.connect.ProductClient;
 import dev.Innocent.ecomvista.exception.BusinessException;
 import dev.Innocent.ecomvista.model.OrderLine;
@@ -27,6 +29,7 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final KafkaOrderProducer kafkaOrderProducer;
+    private final PaymentClient paymentClient;
 
     public Integer createOrder(OrderRequest orderRequest) {
         // Check the customer --> call customer service using feign client
@@ -51,7 +54,15 @@ public class OrderService {
             );
         }
 
-        // todo start Payment process
+        //start Payment process
+        var paymentRequest = new PaymentRequest(
+                orderRequest.amount(),
+                orderRequest.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+        paymentClient.requestOrderPayment(paymentRequest);
 
         // send the order confirmation -> notification service (kafta)
         kafkaOrderProducer.sendOrderConfirmation(
