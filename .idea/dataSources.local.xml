@@ -10,8 +10,14 @@
       <user-name>postgres</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="database" qname="productdb">
-            <node kind="schema" qname="public" />
+          <node negative="1">
+            <node kind="database">
+              <name qname="orderdb" />
+              <name qname="paymentdb" />
+            </node>
+            <node kind="database" qname="productdb">
+              <node kind="schema" qname="public" />
+            </node>
           </node>
         </introspection-scope>
       </schema-mapping>
