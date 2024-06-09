@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/bookMark
+    url: jdbc:postgresql://localhost:5432/bookmark
     username: postgres
     password: Bn19c0248@
     driver-class-name: org.postgresql.Driver
@@ -36,3 +36,9 @@ application:
       expiration: 86400000 # a day
 #      refresh-token:
 #        expiration: 604800000 # 7 days
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-account
+
+server:
+  port: 8088
