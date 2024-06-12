@@ -14,4 +14,6 @@ public interface BookService {
     PageResponse<BorrowedBookResponse> findAllBorrowedBooks(int page, int size, Authentication connectedUser);
     PageResponse<BorrowedBookResponse> findAllReturnedBooks(int page, int size, Authentication connectedUser);
     Integer updateShareableStatus(Integer bookId, Authentication connectedUser);
+    Integer updateArchivedStatus(Integer bookId, Authentication connectedUser);
+    Integer borrowBook(Integer bookId, Authentication connectedUser);
 }
