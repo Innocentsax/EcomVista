@@ -3,6 +3,7 @@ package dev.Innocent.Mappers;
 import dev.Innocent.DTO.request.BookRequest;
 import dev.Innocent.DTO.response.BookResponse;
 import dev.Innocent.DTO.response.BorrowedBookResponse;
+import dev.Innocent.Utils.FileUtils;
 import dev.Innocent.model.Book;
 import dev.Innocent.model.BookTransactionHistory;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class BookMapper {
                 .archived(book.isArchived())
                 .shareable(book.isShareable())
                 .owner(book.getOwner().getFullName())
-//                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
     }
 
