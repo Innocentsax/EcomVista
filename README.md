@@ -16,3 +16,5 @@ With a wide range of high-quality products from fashion to electronics. Shop wit
 - Test the communication
 - RestTemplate VS OpenFeign
 - OpenFeign
+- RestTemplates
+
