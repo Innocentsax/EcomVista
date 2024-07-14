@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class movie {
+public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer movieId;
@@ -36,10 +36,13 @@ public class movie {
     private Set<String> movieCast;
 
     @Column(nullable = false)
-    @NotBlank(message = "Release year is required")
     private Integer releaseYear;
 
     @Column(nullable = false)
     @NotBlank(message = "Poster is required")
     private String poster;
+
+    @Column(nullable = false)
+    @NotBlank(message = "PosterUrl is required")
+    private String posterUrl;
 }
