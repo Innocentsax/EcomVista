@@ -22,4 +22,6 @@ public class MovieDTO {
     private Integer releaseYear;
     @NotBlank(message = "Poster is required")
     private String poster;
+    @NotBlank(message = "PosterUrl is required")
+    private String posterUrl;
 }
