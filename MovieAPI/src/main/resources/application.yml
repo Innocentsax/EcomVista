@@ -13,4 +13,4 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
 project:
-  poster: poster/
+  poster: posters/
