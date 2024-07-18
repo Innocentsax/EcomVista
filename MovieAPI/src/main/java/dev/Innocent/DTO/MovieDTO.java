@@ -11,6 +11,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MovieDTO {
+    private Integer movieId;
     @NotBlank(message = "Title is required")
     private String title;
     @NotBlank(message = "Director is required")
@@ -24,4 +25,5 @@ public class MovieDTO {
     private String poster;
     @NotBlank(message = "PosterUrl is required")
     private String posterUrl;
+
 }
