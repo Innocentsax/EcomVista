@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
@@ -65,11 +66,55 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public MovieDTO getMovie(Integer movieId) {
-        return null;
+        // Check the data in DB if exist, fetch the data of given Id
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
+
+        // Generate the poster URL
+        String posterUrl = baseUrl + "/file/" + movie.getPoster();
+
+        // Map movie object to DTO object and return it
+        return new MovieDTO(
+                movie.getMovieId(),
+                movie.getTitle(),
+                movie.getDirector(),
+                movie.getStudio(),
+                movie.getMovieCast(),
+                movie.getReleaseYear(),
+                movie.getPoster(),
+                posterUrl
+        );
     }
 
     @Override
     public List<MovieDTO> getAllMovies() {
-        return List.of();
+        // Fetch all the data from the database
+        List<Movie> movies = movieRepository.findAll();
+        List<MovieDTO> movieDTOS = new ArrayList<>();
+
+        // Iterate over the list of movies and generate the poster URL
+        for (Movie movie : movies) {
+            String posterUrl = baseUrl + "/file/" + movie.getPoster();
+            movieDTOS.add(new MovieDTO(
+                    movie.getMovieId(),
+                    movie.getTitle(),
+                    movie.getDirector(),
+                    movie.getStudio(),
+                    movie.getMovieCast(),
+                    movie.getReleaseYear(),
+                    movie.getPoster(),
+                    posterUrl
+            ));
+        }
+        return movieDTOS;
+    }
+
+    @Override
+    public MovieDTO updateMovie(Integer movieId, MovieDTO movieDTO, MultipartFile file) throws IOException {
+        return null;
+    }
+
+    @Override
+    public String deleteMovie(Integer movieId) {
+        return "";
     }
 }
