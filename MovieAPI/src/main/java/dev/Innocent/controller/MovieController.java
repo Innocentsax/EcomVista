@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/movie")
@@ -30,6 +31,18 @@ public class MovieController {
     private MovieDTO convertToMovieDTO(String movieDTO) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(movieDTO, MovieDTO.class);
+    }
+
+    @GetMapping("/get-movie/{movieId}")
+    public ResponseEntity<MovieDTO> getMovieHandler(@PathVariable Integer movieId){
+        MovieDTO movie = movieService.getMovie(movieId);
+        return new ResponseEntity<>(movie, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-all-movies")
+    public ResponseEntity<List<MovieDTO>> getAllMoviesHandler(){
+        List<MovieDTO> movies = movieService.getAllMovies();
+        return new ResponseEntity<>(movies, HttpStatus.OK);
     }
 
 }
