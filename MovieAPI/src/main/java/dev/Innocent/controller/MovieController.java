@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.Innocent.DTO.MovieDTO;
 import dev.Innocent.exception.EmptyFileException;
 import dev.Innocent.service.MovieService;
+import dev.Innocent.utils.AppConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -63,5 +64,21 @@ public class MovieController {
     public ResponseEntity<String> deleteMovieHandler(@PathVariable Integer movieId) throws IOException {
         String message = movieService.deleteMovie(movieId);
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-all-movies-with-pagination")
+    public ResponseEntity<?> getAllMoviesWithPaginationHandler(
+            @RequestParam(defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+            @RequestParam(defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize){
+        return new ResponseEntity<>(movieService.getAllMoviesWithPagination(pageNumber, pageSize), HttpStatus.OK);
+    }
+
+    @GetMapping("/get-all-movies-with-pagination-and-sorting")
+    public ResponseEntity<?> getAllMoviesWithPaginationAndSortingHandler(
+            @RequestParam(defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+            @RequestParam(defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
+            @RequestParam(defaultValue = AppConstants.SORT_BY, required = false) String sortBy,
+            @RequestParam(defaultValue = AppConstants.SORT_ORDER, required = false) String order){
+        return new ResponseEntity<>(movieService.getAllMoviesWithPaginationAndSorting(pageNumber, pageSize, sortBy, order), HttpStatus.OK);
     }
 }
