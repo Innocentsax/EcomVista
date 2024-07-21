@@ -3,6 +3,7 @@ package dev.Innocent.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.Innocent.DTO.MovieDTO;
+import dev.Innocent.exception.EmptyFileException;
 import dev.Innocent.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,11 @@ public class MovieController {
     private final MovieService movieService;
 
     @PostMapping("/add-movie")
-    public ResponseEntity<MovieDTO> addMovieHandler(@RequestPart MultipartFile file, @RequestPart String movieDTO) throws IOException {
+    public ResponseEntity<MovieDTO> addMovieHandler(
+            @RequestPart MultipartFile file, @RequestPart String movieDTO) throws IOException {
+        if(file.isEmpty()) {
+            throw new EmptyFileException("File is empty! Please upload a file");
+        }
         MovieDTO movie = convertToMovieDTO(movieDTO);
         MovieDTO savedMovie = movieService.addMovie(movie, file);
         return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
