@@ -2,6 +2,8 @@ package dev.Innocent.service.Impl;
 
 import dev.Innocent.DTO.MovieDTO;
 import dev.Innocent.entities.Movie;
+import dev.Innocent.exception.FileExistException;
+import dev.Innocent.exception.MovieNotFoundException;
 import dev.Innocent.repository.MovieRepository;
 import dev.Innocent.service.FileService;
 import dev.Innocent.service.MovieService;
@@ -39,7 +41,7 @@ public class MovieServiceImpl implements MovieService {
         6. Map movie object to DTO object and return it
          */
         if(Files.exists(Paths.get(path + File.separator + file.getOriginalFilename()))){
-            throw new RuntimeException("File already exists! Please upload a new file");
+            throw new FileExistException("File already exists! Please upload a new file");
         }
 
         String fileName = fileService.uploadFile(path, file);
@@ -74,7 +76,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public MovieDTO getMovie(Integer movieId) {
         // Check the data in DB if exist, fetch the data of given Id
-        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with Id = " + movieId));
 
         // Generate the poster URL
         String posterUrl = baseUrl + "/file/" + movie.getPoster();
@@ -124,7 +126,7 @@ public class MovieServiceImpl implements MovieService {
         3. Set the value of the file "Poster" to file name
         4. Map DTO to movie object
          */
-        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with Id = " + movieId));
 
         String fileName = movie.getPoster();
         if(file != null){
@@ -164,7 +166,7 @@ public class MovieServiceImpl implements MovieService {
         2. Delete the file associated with the record
         3. Delete the record from the database
          */
-        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException("Movie not found with Id = " + movieId));
         Integer id = movie.getMovieId();
         Files.deleteIfExists(Paths.get(path + File.separator + movie.getPoster()));
         movieRepository.delete(movie);
