@@ -10,6 +10,6 @@ public record MoviePageResponse(
         Integer currentPage,
         boolean isLast,
         boolean isFirst,
-        int totalElements
+        Long totalElements
 ) {
 }
