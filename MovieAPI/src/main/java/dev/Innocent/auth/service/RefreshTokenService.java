@@ -31,4 +31,14 @@ public class RefreshTokenService {
         }
         return refreshToken;
     }
+
+    public RefreshToken validateRefreshToken(String token) {
+         RefreshToken refreshToken = refreshTokenRepository.findByRefreshToken(token)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid refresh Token"));
+        if (refreshToken.getExpirationTime().compareTo(Instant.now()) < 0) {
+            refreshTokenRepository.delete(refreshToken);
+            throw new IllegalArgumentException("Refresh token has expired");
+        }
+        return refreshToken;
+    }
 }
