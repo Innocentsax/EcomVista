@@ -7,25 +7,23 @@ import lombok.*;
 import java.time.Instant;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Table(name = "users")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class RefreshToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tokenId;
+    private Integer tokenId;
 
     @Column(nullable = false, length = 500)
-    @NotBlank(message = "Refresh token is mandatory")
+    @NotBlank(message = "Please enter refresh token value!")
     private String refreshToken;
 
     @Column(nullable = false)
     private Instant expirationTime;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private User user;
 }
