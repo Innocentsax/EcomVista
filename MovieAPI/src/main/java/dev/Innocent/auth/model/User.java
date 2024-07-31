@@ -5,75 +5,84 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
+@Getter
+@Builder
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Integer userId;
 
-    @Column(unique = true)
-    @NotBlank(message = "Username is mandatory")
-    private String username;
-
-    @NotBlank(message = "Password is mandatory")
-    @Size(min = 6, message = "Password should be at least 6 characters")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "Password should contain at least one uppercase letter, one lowercase letter, and one number")
-    private String password;
-
-    @Email(message = "Email should be valid")
-    @Column(unique = true)
-    @NotBlank(message = "Email is mandatory")
-    private String email;
+    @NotBlank(message = "The name field can't be blank")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @NotBlank(message = "The username field can't be blank")
+    @Column(unique = true)
+    private String username;
+
+    @NotBlank(message = "The email field can't be blank")
+    @Column(unique = true)
+    @Email(message = "Please enter email in proper format!")
+    private String email;
+
+    @NotBlank(message = "The password field can't be blank")
+    @Size(min = 5, message = "The password must have at least 5 characters")
+    private String password;
+
+    @OneToOne(mappedBy = "user")
     private RefreshToken refreshToken;
+
+    @OneToOne(mappedBy = "user")
+    private ForgotPassword forgotPassword;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    private boolean isAccountNonExpired = true;
-    private boolean isAccountNonLocked = true;
-    private boolean isCredentialsNonExpired = true;
-    private boolean isEnabled = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return isAccountNonExpired;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return isAccountNonLocked;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return isCredentialsNonExpired;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return isEnabled;
+        return true;
     }
 }
