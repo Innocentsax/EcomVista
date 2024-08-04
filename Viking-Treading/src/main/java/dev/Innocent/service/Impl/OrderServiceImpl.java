@@ -73,6 +73,32 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus(OrderStatus.SUCCESS);
         order.setOrderType(OrderType.BUY);
         Order savedOrder = orderRepository.save(order);
+
+        // Create Asset
+
+        return savedOrder;
+    }
+
+    @Transactional
+    public Order sellAsset(Coin coin, double quantity, User user) throws Exception {
+        if(quantity <= 0){
+            throw new Exception("Quantity must be greater than 0");
+        }
+        double sellPrice = coin.getCurrentPrice();
+        double buyPrice = assestToSell.getPrice();
+        OrderItem orderItem = createOrderItem(coin, quantity, buyPrice, sellPrice);
+        Order order = createOrder(user, orderItem, OrderType.SELL);
+        orderItem.setOrder(order);
+
+        walletService.payOrderPayment(order, user);
+
+        order.setStatus(OrderStatus.SUCCESS);
+        order.setOrderType(OrderType.SELL);
+        Order savedOrder = orderRepository.save(order);
+
+        // Create Asset
+
+        return savedOrder;
     }
 
     @Override
