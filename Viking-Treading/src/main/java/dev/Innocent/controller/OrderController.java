@@ -1,6 +1,7 @@
 package dev.Innocent.controller;
 
 import dev.Innocent.DTO.request.CreateOrderRequest;
+import dev.Innocent.enums.OrderType;
 import dev.Innocent.model.Coin;
 import dev.Innocent.model.Order;
 import dev.Innocent.model.User;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/order")
@@ -45,5 +48,15 @@ public class OrderController {
         }
     }
 
+    @GetMapping()
+    public ResponseEntity<List<Order>> getAllOrdersForUser(
+            @RequestHeader("Authorization") String jwt,
+            @RequestParam(required = false) OrderType order_type,
+            @RequestParam(required = false) String asset_symbol
+    ) throws Exception {
+        Long userId = userService.findUserProfileByJwt(jwt).getId();
+        List<Order> orders = orderService.getAllOrdersOfUser(userId, order_type, asset_symbol);
+        return ResponseEntity.ok(orders);
+    }
 
 }
