@@ -8,6 +8,7 @@ import dev.Innocent.service.CoinService;
 import dev.Innocent.service.OrderService;
 import dev.Innocent.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,4 +29,21 @@ public class OrderController {
         Order order = orderService.processOrder(coin, createOrderRequest.getQuantity(), createOrderRequest.getOrderType(), user);
         return ResponseEntity.ok(order);
     }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity<Order> getOrderById(@RequestHeader("Authorization") String jwt,
+                                              @PathVariable Long orderId) throws Exception {
+        if(jwt == null){
+            throw new Exception("Token missing");
+        }
+        User user = userService.findUserProfileByJwt(jwt);
+        Order order = orderService.getOrderById(orderId);
+        if(order.getUser().getId().equals(user.getId())){
+            return ResponseEntity.ok(order);
+        }else{
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
+
+
 }
