@@ -1,5 +1,6 @@
 package dev.Innocent.model;
 
+import dev.Innocent.enums.PaymentOrderStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,4 +14,6 @@ public class PaymentOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long amount;
+    private PaymentOrderStatus status;
 }
