@@ -1,10 +1,8 @@
 package dev.Innocent.controller;
 
-import dev.Innocent.model.Order;
-import dev.Innocent.model.User;
-import dev.Innocent.model.Wallet;
-import dev.Innocent.model.WalletTransaction;
+import dev.Innocent.model.*;
 import dev.Innocent.service.OrderService;
+import dev.Innocent.service.PaymentService;
 import dev.Innocent.service.UserService;
 import dev.Innocent.service.WalletService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +17,7 @@ public class WalletController {
     private final WalletService walletService;
     private final UserService userService;
     private final OrderService orderService;
+    private final PaymentService paymentService;
 
     @GetMapping("/api/wallet")
     public ResponseEntity<Wallet> getUserWallet(@RequestHeader("Authorization") String jwt) throws Exception {
@@ -45,6 +44,23 @@ public class WalletController {
         User senderUser = userService.findUserProfileByJwt(jwt);
         Order order = orderService.getOrderById(orderId);
         Wallet senderWallet = walletService.payOrderPayment(order, senderUser);
+        return new ResponseEntity<>(senderWallet, HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/api/wallet/deposit")
+    public ResponseEntity<Wallet> addBalanceToWallet(
+            @RequestHeader("Authorization") String jwt,
+            @RequestParam(name = "order_id") Long orderId,
+            @RequestParam(name = "payment_id") String paymentId) throws Exception{
+        User senderUser = userService.findUserProfileByJwt(jwt);
+        Wallet senderWallet = walletService.getUserWallet(senderUser);
+
+        PaymentOrder paymentOrder = paymentService.getPaymentOrderById(orderId);
+        Boolean status = paymentService.proceedPaymentOrder(paymentOrder, paymentId);
+        if(status){
+            senderWallet = walletService.addWallet(senderWallet, paymentOrder.getAmount());
+        }
+
         return new ResponseEntity<>(senderWallet, HttpStatus.ACCEPTED);
     }
 }
