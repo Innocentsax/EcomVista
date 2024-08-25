@@ -1,10 +1,17 @@
 package dev.Innocent.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Table(name = "asset")
 public class Asset {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
