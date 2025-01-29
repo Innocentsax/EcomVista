@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="postgres@localhost">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.52">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>mdy</DateStyle>
       <IntrospectionStateNumber>3433</IntrospectionStateNumber>
@@ -9350,19 +9350,19 @@ false Zulu
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
     <sequence id="517" parent="516" name="category_seq">
-      <DasType>bigint|0s</DasType>
       <ObjectId>22788</ObjectId>
       <SequenceIdentity>1+50</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>3405</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <sequence id="518" parent="516" name="product_seq">
-      <DasType>bigint|0s</DasType>
       <ObjectId>22789</ObjectId>
       <SequenceIdentity>1+50</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>3405</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="519" parent="516" name="category">
@@ -9384,22 +9384,22 @@ false Zulu
       <OwnerName>postgres</OwnerName>
     </table>
     <column id="522" parent="519" name="id">
-      <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>3405</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="523" parent="519" name="description">
-      <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
       <StateNumber>3405</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="524" parent="519" name="name">
-      <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
       <StateNumber>3405</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <index id="525" parent="519" name="category_pkey">
@@ -9419,72 +9419,72 @@ false Zulu
       <UnderlyingIndexId>22774</UnderlyingIndexId>
     </key>
     <column id="527" parent="520" name="installed_rank">
-      <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>3395</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="528" parent="520" name="version">
-      <DasType>varchar(50)|0s</DasType>
       <Position>2</Position>
       <StateNumber>3395</StateNumber>
+      <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="529" parent="520" name="description">
-      <DasType>varchar(200)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>3395</StateNumber>
+      <StoredType>varchar(200)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="530" parent="520" name="type">
-      <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>3395</StateNumber>
+      <StoredType>varchar(20)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="531" parent="520" name="script">
-      <DasType>varchar(1000)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>3395</StateNumber>
+      <StoredType>varchar(1000)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="532" parent="520" name="checksum">
-      <DasType>integer|0s</DasType>
       <Position>6</Position>
       <StateNumber>3395</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="533" parent="520" name="installed_by">
-      <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StateNumber>3395</StateNumber>
+      <StoredType>varchar(100)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="534" parent="520" name="installed_on">
-      <DasType>timestamp|0s</DasType>
       <DefaultExpression>now()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
       <StateNumber>3395</StateNumber>
+      <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
     <column id="535" parent="520" name="execution_time">
-      <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
       <StateNumber>3395</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="536" parent="520" name="success">
-      <DasType>boolean|0s</DasType>
       <NotNull>1</NotNull>
       <Position>10</Position>
       <StateNumber>3395</StateNumber>
+      <StoredType>boolean|0s</StoredType>
       <TypeId>16</TypeId>
     </column>
     <index id="537" parent="520" name="flyway_schema_history_pk">
@@ -9508,41 +9508,41 @@ false Zulu
       <UnderlyingIndexId>22752</UnderlyingIndexId>
     </key>
     <column id="540" parent="521" name="id">
-      <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>3405</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="541" parent="521" name="category_id">
-      <DasType>integer|0s</DasType>
       <Position>2</Position>
       <StateNumber>3405</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="542" parent="521" name="description">
-      <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
       <StateNumber>3405</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="543" parent="521" name="name">
-      <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
       <StateNumber>3405</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="544" parent="521" name="available_quantity">
-      <DasType>double precision|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>3405</StateNumber>
+      <StoredType>double precision|0s</StoredType>
       <TypeId>701</TypeId>
     </column>
     <column id="545" parent="521" name="price">
-      <DasType>numeric(38,2 digit)|0s</DasType>
       <Position>6</Position>
       <StateNumber>3405</StateNumber>
+      <StoredType>numeric(38,2 digit)|0s</StoredType>
       <TypeId>1700</TypeId>
     </column>
     <foreign-key id="546" parent="521" name="fk1mjngsajnojnwb">
