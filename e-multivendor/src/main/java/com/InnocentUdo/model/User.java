@@ -1,10 +1,13 @@
 package com.InnocentUdo.model;
 
+import com.InnocentUdo.domain.USER_ROLE;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import java.util.HashMap;
 
 @Entity
 public class User {
@@ -18,4 +21,7 @@ public class User {
 
     private String email;
     private String fullName;
+    private String mobile;
+    private USER_ROLE role = USER_ROLE.ROLE_CUSTOMER;
+    private Set<Address> addresses = new HashMap<>();
 }
