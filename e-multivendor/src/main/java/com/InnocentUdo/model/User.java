@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.HashMap;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -24,4 +25,5 @@ public class User {
     private String mobile;
     private USER_ROLE role = USER_ROLE.ROLE_CUSTOMER;
     private Set<Address> addresses = new HashMap<>();
+    private Set<Coupon> usedCoupons = new HashMap<>();
 }
