@@ -1,12 +1,11 @@
 package com.InnocentUdo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -24,4 +23,9 @@ public class Coupon {
     private double discountPercentage;
     private LocalDate validityStartDate;
     private LocalDate validityEndDate;
+    private double minimumOrderValue;
+    private boolean isActive = true;
+
+    @ManyToMany(mappedBy = "usedCoupons")
+    private Set<User> userByUsers = new HashSet<>();
 }
