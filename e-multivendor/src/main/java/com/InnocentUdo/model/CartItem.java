@@ -21,7 +21,9 @@ public class CartItem {
     private Cart cart;
 
     private Product product;
-    private int quantity;
+    private int quantity = 1;
     private String size;
-
+    private Integer mrpPrice;
+    private Integer sellingPrice;
+    private Long userId;
 }
