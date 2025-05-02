@@ -21,7 +21,7 @@ public class Cart {
     @OneToOne
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CartItem> cartItem = new HashSet<>();
     private double totalSellingPrice;
     private int totalItem;
