@@ -1,10 +1,11 @@
 package com.InnocentUdo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,4 +26,15 @@ public class Product {
     private int discountPercent;
     private int quantity;
     private String color;
+
+    @ElementCollection
+    private List<String> images = new ArrayList<>();
+
+    private int numRatings;
+    @ManyToOne
+    private Category category;
+    @ManyToOne
+    private Seller seller;
+    private LocalDateTime createdAt;
+    private String sizes;
 }
