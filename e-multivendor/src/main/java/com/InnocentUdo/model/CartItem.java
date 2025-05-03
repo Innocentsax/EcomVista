@@ -20,6 +20,7 @@ public class CartItem {
     @JsonIgnore
     private Cart cart;
 
+    @ManyToOne
     private Product product;
     private int quantity = 1;
     private String size;
