@@ -36,5 +36,10 @@ public class Product {
     @ManyToOne
     private Seller seller;
     private LocalDateTime createdAt;
+
+//    @ElementCollection
     private String sizes;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 }
