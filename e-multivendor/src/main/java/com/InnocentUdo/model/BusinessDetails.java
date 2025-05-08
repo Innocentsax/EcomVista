@@ -1,20 +1,15 @@
 package com.InnocentUdo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.*;
+import lombok.Data;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
+
+@Data
 public class BusinessDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String businessName;
+    private String businessEmail;
+    private String businessMobile;
+    private String businessAddress;
+    private String logo;
+    private String banner;
 }
