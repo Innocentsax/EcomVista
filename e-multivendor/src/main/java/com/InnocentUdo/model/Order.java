@@ -1,5 +1,6 @@
 package com.InnocentUdo.model;
 
+import com.InnocentUdo.domain.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,4 +33,9 @@ public class Order {
 
     @Embedded
     private PaymentDetails paymentDetails = new PaymentDetails();
+
+    private double totalMrpPrice;
+    private Integer totalSellingPrice;
+    private Integer discount;
+    private OrderStatus orderStatus;
 }
