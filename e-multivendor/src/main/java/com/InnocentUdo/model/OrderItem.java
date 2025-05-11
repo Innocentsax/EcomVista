@@ -1,5 +1,6 @@
 package com.InnocentUdo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,6 +15,10 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @JsonIgnore
+    @ManyToOne
+    private Order order;
 
     @ManyToOne
     private Product product;
