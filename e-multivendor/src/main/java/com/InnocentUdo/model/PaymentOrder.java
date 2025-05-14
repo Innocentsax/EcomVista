@@ -1,10 +1,12 @@
 package com.InnocentUdo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.InnocentUdo.domain.PaymentMethod;
+import com.InnocentUdo.domain.PaymentOrderStatus;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,4 +24,10 @@ public class PaymentOrder {
     private PaymentOrderStatus status = PaymentOrderStatus.PENDING;
     private PaymentMethod paymentMMethod;
     private String paymentLinkId;
+
+    @ManyToOne
+    private User user;
+
+    @OneToMany
+    private Set<Order> orders = new HashSet<>();
 }
