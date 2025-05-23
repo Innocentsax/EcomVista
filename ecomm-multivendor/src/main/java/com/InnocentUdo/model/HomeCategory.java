@@ -1,5 +1,6 @@
 package com.InnocentUdo.model;
 
+import com.InnocentUdo.domain.HomeCategorySection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
